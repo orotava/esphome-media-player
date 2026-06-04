@@ -776,7 +776,7 @@ lvgl:
                           text: $tira_led
                       - label:
                           align: bottom_left
-                          id: luz_bbq_label #id label
+                          id: luz_terraza_label #id label
                           text: "Luz Terraza" #Nombre label
                     on_click:
                       - homeassistant.service:
