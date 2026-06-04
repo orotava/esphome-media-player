@@ -759,6 +759,31 @@ lvgl:
                           service: light.toggle
                           data:
                             entity_id: light.luz_bbq #Entidad Luz
+                # Luz Terraza
+                - button:
+                    height: $button_height_single
+                    width: $button_width
+                    checkable: true
+                    id: luz_bbq_button
+                    styles: control
+                    grid_cell_column_pos: 1 #Posicion en grid
+                    grid_cell_row_pos: 0 #Posicion en grid
+                    widgets:
+                      - label:
+                          text_font: $icon_font
+                          align: top_left
+                          id: $tira_led #id icono
+                          text:  $luz_off
+                      - label:
+                          align: bottom_left
+                          id: luz_bbq_label #id label
+                          text: "Luz Terraza" #Nombre label
+                    on_click:
+                      - homeassistant.service:
+                          service: light.toggle
+                          data:
+                            entity_id: light.luz_terraza #Entidad Luz
+ 
                 # Led Jardin
                 - button:
                     height: $button_height_single
@@ -766,7 +791,7 @@ lvgl:
                     checkable: true
                     id: luz_led_button
                     styles: control
-                    grid_cell_column_pos: 1 #Posicion en grid
+                    grid_cell_column_pos: 2 #Posicion en grid
                     grid_cell_row_pos: 0 #Posicion en grid
                     widgets:
                       - label:
@@ -791,8 +816,8 @@ lvgl:
                     checkable: true
                     id: guirnaldas_chill_out_button
                     styles: control
-                    grid_cell_column_pos: 2
-                    grid_cell_row_pos: 0
+                    grid_cell_column_pos: 0
+                    grid_cell_row_pos: 1
                     widgets:
                       - label:
                           text_font: $icon_font
@@ -815,7 +840,7 @@ lvgl:
                     checkable: true
                     id: focos_jardin_button
                     styles: control
-                    grid_cell_column_pos: 0 #Posicion en grid
+                    grid_cell_column_pos: 1 #Posicion en grid
                     grid_cell_row_pos: 1 #Posicion en grid
                     widgets:
                       - label:
@@ -839,7 +864,7 @@ lvgl:
                     checkable: true
                     id: cubos_chill_out_button
                     styles: control
-                    grid_cell_column_pos: 1 #Posicion en grid
+                    grid_cell_column_pos: 2 #Posicion en grid
                     grid_cell_row_pos: 1 #Posicion en grid
                     widgets:
                       - label:
@@ -863,8 +888,8 @@ lvgl:
                     checkable: true
                     id: focos_piscina_button
                     styles: control
-                    grid_cell_column_pos: 2 #Posicion en grid
-                    grid_cell_row_pos: 1 #Posicion en grid
+                    grid_cell_column_pos: 0 #Posicion en grid
+                    grid_cell_row_pos: 2 #Posicion en grid
                     widgets:
                       - label:
                           text_font: $icon_font
@@ -887,7 +912,7 @@ lvgl:
                     checkable: true
                     id: led_piscina_button
                     styles: control
-                    grid_cell_column_pos: 0 #Posicion en grid
+                    grid_cell_column_pos: 1 #Posicion en grid
                     grid_cell_row_pos: 2 #Posicion en grid
                     widgets:
                       - label:
