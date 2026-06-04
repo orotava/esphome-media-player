@@ -102,6 +102,18 @@ binary_sensor:
           state:
             checked: !lambda return x;    
 
+ # Luz Terraza           
+  - platform: homeassistant
+    id: luz_terraza
+    entity_id: light.luz_terraza
+    trigger_on_initial_state: true
+    on_state:
+      then:
+        lvgl.widget.update:
+          id: luz_terraza_button
+          state:
+            checked: !lambda return x;    
+
  # Focos Piscina          
   - platform: homeassistant
     id: focos_piscina
