@@ -772,8 +772,8 @@ lvgl:
                       - label:
                           text_font: $icon_font
                           align: top_left
-                          id: $tira_led #id icono
-                          text:  $luz_off
+                          id: luz_terraza_icon  #id icono
+                          text: $tira_led
                       - label:
                           align: bottom_left
                           id: luz_bbq_label #id label
