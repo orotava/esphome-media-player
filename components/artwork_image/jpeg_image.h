@@ -11,10 +11,6 @@
 namespace esphome {
 namespace artwork_image {
 
-/// Custom error manager that longjmps instead of calling exit().
-/// The jmp_buf is re-armed by setjmp() at the top of every method that calls
-/// into libjpeg: decode state persists across loop() passes, and a longjmp
-/// into a dead stack frame is undefined behavior.
 struct JpegErrorMgr {
   jpeg_error_mgr pub;
   jmp_buf setjmp_buffer;
@@ -23,19 +19,13 @@ struct JpegErrorMgr {
 
 /**
  * @brief Image decoder specialization for JPEG images.
- *
- * The full JPEG must be buffered before decoding starts (libjpeg's mem source
- * needs the whole file), but the scanline output work is spread across
- * multiple loop() passes on a time budget. This keeps the main loop
- * responsive and, more importantly, avoids a single long burst of PSRAM
- * writes that competes with the RGB panel's DMA scan-out.
  */
 class JpegDecoder : public ImageDecoder {
  public:
   /**
    * @brief Construct a new JPEG Decoder object.
    *
-   * @param image The image to decode the stream into.
+   * @param display The image to decode the stream into.
    */
   JpegDecoder(ArtworkImage *image) : ImageDecoder(image) {}
   ~JpegDecoder() override;
@@ -45,6 +35,9 @@ class JpegDecoder : public ImageDecoder {
   bool is_decoding() const override { return this->decode_started_ && !this->is_finished(); }
 
  protected:
+#if defined(USE_ESP_IDF) && defined(CONFIG_IDF_TARGET_ESP32P4)
+  int decode_hardware_(uint8_t *buffer, size_t size);
+#endif
   int start_decode_(uint8_t *buffer, size_t size);
   int decode_scanlines_();
   void cleanup_();
